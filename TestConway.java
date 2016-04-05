@@ -4,7 +4,8 @@ import org.junit.Test;
 
 public class TestConway {
 
-	//Tests three scenarios of convertToInt(), which must be public
+	//Tests three scenarios of convertToInt()
+	//convertToInt() has been refactored and is ultimately never necessary
 	@Test
 	public void testConvertInt(){
 		MainPanel test = new MainPanel(10);
@@ -22,7 +23,7 @@ public class TestConway {
 		assertEquals(oldInt,newInt);
 	}
 
-	//Test toString on MainPanel
+	//Test toString() on MainPanel
 	@Test
 	public void testPanelToString(){
 		MainPanel test = new MainPanel(10);
@@ -33,7 +34,7 @@ public class TestConway {
 		assertEquals(oldString,newString);
 	}
 
-	//Test true and false toStrings in Cell
+	//Test true and false toString()'s in Cell
 	@Test
 	public void testCellToString(){
 		Cell trueCell = new Cell(true);

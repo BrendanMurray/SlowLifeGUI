@@ -31,7 +31,7 @@ public class MainPanel extends JPanel {
 	return _cells;
     }
 
-    private int convertToInt(int x) {
+    public int convertToInt(int x) {
     	return x;
     }
 
