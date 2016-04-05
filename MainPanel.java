@@ -57,8 +57,8 @@ public class MainPanel extends JPanel {
 	if (_cells[rightX][y].getAlive())     { numNeighbors++; }
 	if (_cells[x][upY].getAlive())        { numNeighbors++; }
 	if (_cells[x][downY].getAlive())      { numNeighbors++; }
-	return convertToInt(numNeighbors);
 
+	return numNeighbors;
 
     }
 
@@ -180,11 +180,19 @@ public class MainPanel extends JPanel {
     	// the String, if dead, a ".".
     	String toWrite = "";
     	for (int j = 0; j < _size; j++)
+        {
+    	    for(int k = 0; k < _size; k++){
+    		    toWrite += _cells[j][k].toString();
+            }
+    	toWrite += "\n";
+        }
+    	return toWrite;
     }
 
     /**
      * Run one iteration of the Game of Life
      */
+
     public void run() {
 	backup();
 	calculateNextIteration();
@@ -197,8 +205,6 @@ public class MainPanel extends JPanel {
     public void runContinuous() {
 	_running = true;
 	while (_running) {
-	    System.out.println("Running...");
-	    int origR = _r;
 	    backup();
 	    calculateNextIteration();
 	}
@@ -207,17 +213,22 @@ public class MainPanel extends JPanel {
     /**
      * Stop a continuously running system.
      */
+
     public void stop() {
 	_running = false;
     }
 
+
     /**
+     * Convert the array of Cell objects into an
      * array of booleans.
      */
+
     public boolean[][] convertToBoolean(Cell[][] cells) {
 
 	// 2-D array to return.  Remember everything
 	// is false by default for boolean arrays!
+
 	boolean[][] toReturn = new boolean[_size][_size];
 
 	for (int j = 0; j < _size; j++) {
@@ -232,12 +243,14 @@ public class MainPanel extends JPanel {
 	    }
 	}
 	return toReturn;
+
     }
 
     /**
      * Revert back to the previous iteration,
      * which we have saved in _backupCells.
      */
+
     public void undo() {
 	displayIteration(convertToBoolean(_backupCells));
     }
@@ -246,6 +259,7 @@ public class MainPanel extends JPanel {
      * Loop through the entire array and reset
      * each of the Cells in the MainPanel.
      */
+
     public void clear() {
 	for (int j = 0; j < _size; j++) {
 	    for (int k = 0; k < _size; k++) {
@@ -262,8 +276,10 @@ public class MainPanel extends JPanel {
      * Load in a previously saved Game of Life
      * configuration.
      */
+
     public void load(ArrayList<String> lines) {
 	boolean[][] loaded = new boolean[_size][_size];
+
 
 	for (int j = 0; j < _size; j++) {
 	    String l = lines.get(j);
@@ -278,6 +294,7 @@ public class MainPanel extends JPanel {
 		// We could specifically check for
 		// an 'X' for alive and throw an
 		// error if we get an unexpected char.
+		if (l.charAt(k) == '.') {
 		    _cells[j][k].setAlive(false);
 		    loaded[j][k] = false;
 		} else {
@@ -291,7 +308,9 @@ public class MainPanel extends JPanel {
 	// we expect, display the iteration.
 	displayIteration(loaded);
 	// debugPrint();
+
     }
+
 
     public MainPanel(int size) {
 	super();
@@ -307,4 +326,5 @@ public class MainPanel extends JPanel {
 	}
 
     }
+
 }
