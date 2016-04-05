@@ -31,6 +31,20 @@ public class MainPanel extends JPanel {
 	return _cells;
     }
 
+    public int originalConvertToInt(int x){
+        	int c = 0;
+        	String padding = "0";
+        	while (c < _r) {
+        	    String l = new String("0");
+        	    padding += l;
+        	    c++;
+        	}
+
+        	String n = padding + String.valueOf(x);
+        	int q = Integer.parseInt(n);
+        	return q;
+    }
+
     public int convertToInt(int x) {
     	return x;
     }
@@ -173,6 +187,28 @@ public class MainPanel extends JPanel {
      * Convert the Main Panel into a String
      * which can be written to a file.
      */
+
+     public String oldToString() {
+
+         	// Loop through all of the cells, and
+         	// if they are alive, add an "X" to
+         	// the String, if dead, a ".".
+
+         	String toWrite = "";
+
+         	for (int j = 0; j < _size; j++) {
+         	    for(int k = 0; k < _size; k++) {
+         		if (_cells[j][k].getAlive()) {
+         		    toWrite += _cells[j][k].toString();
+         		} else {
+         		    toWrite += _cells[j][k].toString();
+         		}
+
+         	    }
+         	    toWrite += "\n";
+         	}
+         	return toWrite;
+    }
 
     public String toString() {
     	// Loop through all of the cells, and
